@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Home</title>
+</head>
+
+<body>
+
+	<header th:fragment="header-user">
+		<p th:text="'Usuario: ' + ${session.nombreUsu}">Nombre en sesión</p>
+		<a th:href="@{/usuario/cerrar}">Salir</a>
+		<a th:href="@{/usuario/login}">login</a>
+	</header>
+
+
+</body>
+
+</html>

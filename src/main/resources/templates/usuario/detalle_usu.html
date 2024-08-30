@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>New Sporify</title>
+</head>
+<body>
+	
+<header th:insert="~{usuario/template_usua.html::header-user}"></header>
+<table class="table">
+            <table class="table">
+		<thead>
+			<tr>
+				<th scope="col">Id</th>
+				<th scope="col">Nombre</th>
+				<th scope="col">Audio</th>
+				<th scope="col">Usuario</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="m:${musica}">
+				<td th:text="${m.idmusica}"></td>
+				<td th:text="${m.nombre}"></td>
+				<td>
+					<audio controls>
+						<source th:src="@{/Audio/{aud} (aud= ${m.audio})}" type="audio/mpeg">
+					</audio>
+				</td>
+				<td th:text="${m.usuario != null ? m.usuario.nombre : 'Sin usuario asociado'}">ID Usuario</td>
+			</tr>
+		</tbody>
+	</table>
+</html>

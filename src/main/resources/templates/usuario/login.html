@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>New Sporify</title>
+</head>
+
+<body>
+	<h1>Login</h1>
+	
+	<form th:action="@{/usuario/acceder}" method="post">
+
+
+		<div>
+			<div>
+				<label>ID:</label>
+				<input type="text" id="idusuario" name="idusuario">
+			</div>
+			<div>
+				<label>Nombre:</label>
+				<input type="text" id="nombre" name="nombre">
+			</div>
+			<div>
+				<label>Contraseña:</label>
+				<input type="text" id="contraseña" name="contraseña">
+			</div>
+
+			<div>
+				<button type="submit">Ingresar</button>
+			</div>
+
+		</div>
+	</form>
+	
+	<div>
+				<label>Si aun no tiene cuenta <a th:href="@{/usuario/registro}">aqui</a></label>
+				 <p th:text="${message}"></p>
+	</div>
+</body>
+
+</html>

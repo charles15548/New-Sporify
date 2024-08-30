@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html>
+
+<head>
+
+	<meta charset="utf-8">
+	<title>New_Spo</title>
+</head>
+
+<body>
+
+
+	<form th:action="@{/save}" method="post" enctype="multipart/form-data">
+		<div>
+			<label>Id</label>
+			<input id="idmusica" name="idmusica">
+		</div>
+		<div>
+			<label>Nombre</label>
+			<input id="nombre" name="nombre">
+		</div>
+		<div>
+			<label>Audio</label>
+			<input type="file" id="aud" name="aud">
+			<!--<a  target="_blank"  id="audio" name="audio" >selecciona</a>-->
+		</div>
+	
+
+
+		<button type="submit">Guardar</button>
+	</form>
+
+
+
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col">Id</th>
+				<th scope="col">Nombre</th>
+				<th scope="col">Audio</th>
+				<th scope="col">Usuario</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="m:${musica}">
+				<td th:text="${m.idmusica}"></td>
+				<td th:text="${m.nombre}"></td>
+				<td><audio controls>
+						<source th:src="@{/Audio/{aud} (aud= ${m.audio})}" type="audio/mpeg">
+					</audio>
+				</td>
+				<!--<td > <img  th:src="@{/Audio/{aud} (aud=${m.audio})}" alt="" width="110" height="70"></td>-->
+			
+				<td th:text="${m.usuario != null ? m.usuario.idusuario : 'Sin usuario asociado'}">ID Usuario</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+
+</html>

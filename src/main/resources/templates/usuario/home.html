@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Home</title>
+</head>
+<body>
+
+
+<header th:insert="~{usuario/template_usua.html::header-user}"></header>
+
+	<div>
+		<!-- Lista de usuarios-->
+		<table class="table">
+		<thead>
+			<tr>
+				<th scope="col">Id</th>
+				<th scope="col">Nombre</th>
+				<th scope="col">Contraseña</th>
+				<th scope="col"></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="u:${usuarios}">
+				<td th:text="${u.idusuario}"></td>
+				<td th:text="${u.nombre}"></td>
+				<td th:text="${u.contraseña}"></td>
+				
+                 <td><a th:href="@{/usuario/detalle/{id} (id=${u.idusuario})}" >Ver Detalle</a></td>
+			</tr>
+		</tbody>
+	</table>
+	</div>
+
+</body>
+</html>
