@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="ISO-8859-1">
-<title>New Sporify</title>
+	<meta charset="ISO-8859-1">
+	<title>New Sporify</title>
 </head>
+
 <body>
-	
-<header th:insert="~{usuario/template_usua.html::header-user}"></header>
-<table class="table">
-            <table class="table">
+
+	<header th:insert="~{usuario/template_usua.html::header-user}"></header>
+	<table class="table">
+
 		<thead>
 			<tr>
 				<th scope="col">Id</th>
@@ -21,13 +23,42 @@
 			<tr th:each="m:${musica}">
 				<td th:text="${m.idmusica}"></td>
 				<td th:text="${m.nombre}"></td>
+
 				<td>
-					<audio controls>
-						<source th:src="@{/Audio/{aud} (aud= ${m.audio})}" type="audio/mpeg">
+					<audio controls data-audio-id="${m.idmusica}" >
+						<source th:src="@{/Audio/{aud}(aud=${m.audio})}" type="audio/mpeg">
 					</audio>
+					
 				</td>
+				
 				<td th:text="${m.usuario != null ? m.usuario.nombre : 'Sin usuario asociado'}">ID Usuario</td>
 			</tr>
 		</tbody>
 	</table>
+	<footer th:insert="~{usuario/template_usua.html::footer}"></footer>
+	
+	 <script>
+        // Obtener todos los elementos de audio en la tabla
+        const audios = document.querySelectorAll('audio[data-audio-id]');
+
+        // Agregar un event listener a cada audio para detectar cuándo se reproduce
+        audios.forEach(audio => {
+            audio.addEventListener('play', function () {
+                // Obtener la fuente del audio en reproducción
+                const audioSrc = this.querySelector('source').getAttribute('src');
+                
+                // Actualizar la fuente del audio en el footer
+                const footerAudioSource = document.getElementById('footer-audio-source');// Selecciona el <source> en el footer
+                footerAudioSource.setAttribute('src', audioSrc);
+
+                // Recargar el audio en el footer para que tome la nueva fuente
+                const footerAudio = footerAudioSource.parentElement;// Obtiene el <audio> que es el contenedor del <source>
+                footerAudio.load(); // Recarga el control de audio para que tome la nueva fuente
+				footerAudio.play(); // Inicia la reproducción del audio
+                
+
+            });
+        });
+    </script>
+
 </html>
